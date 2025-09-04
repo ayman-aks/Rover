@@ -2,10 +2,12 @@ package com.rover.input;
 
 import com.rover.util.ParsingFunctions;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.function.BiConsumer;
 
 @AllArgsConstructor
+@Getter
 public enum InputType {
 
     PLATEAU(ParsingFunctions::parsePlateau),
@@ -14,7 +16,4 @@ public enum InputType {
 
     private final BiConsumer<String, InputContext> parser;
 
-    public void parse(String line, InputContext context) {
-        parser.accept(line, context);
-    }
 }

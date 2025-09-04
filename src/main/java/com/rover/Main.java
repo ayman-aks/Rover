@@ -25,7 +25,7 @@ public class Main {
 
                 InputType type = detectInputType(line,lineNumber==1);
 
-                type.parse(line, context);
+                type.getParser().accept(line, context);
             }
         }
 
@@ -36,7 +36,7 @@ public class Main {
         }
     }
 
-    private static InputType detectInputType(String line, boolean firstLine) {
+    public static InputType detectInputType(String line, boolean firstLine) {
         if (firstLine) return InputType.PLATEAU;
         if (line.matches("\\d+ \\d+ [NEWS]")) return InputType.ROVER_POSITION;
         if (line.matches("[LRM]+")) return InputType.ROVER_COMMANDS;

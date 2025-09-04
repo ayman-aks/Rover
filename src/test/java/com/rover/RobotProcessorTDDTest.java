@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.rover.Main.detectInputType;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RobotProcessorTDDTest {
@@ -20,12 +21,9 @@ class RobotProcessorTDDTest {
         for (String line : lines) {
             lineNumber++;
             if (line.isBlank()) continue;
-            InputType type;
-            if (lineNumber == 1) type = InputType.PLATEAU;
-            else if (lineNumber % 2 == 0) type = InputType.ROVER_POSITION;
-            else type = InputType.ROVER_COMMANDS;
+            InputType type= detectInputType(line, lineNumber==1);
 
-            type.parse(line, context);
+            type.getParser().accept(line, context);
         }
         return context;
     }
@@ -88,7 +86,7 @@ class RobotProcessorTDDTest {
 
         // when / then
         Exception ex = assertThrows(IllegalArgumentException.class, () -> parseInput(input));
-        assertTrue(ex.getMessage().contains("Invalid robot direction"));
+        assertTrue(ex.getMessage().contains("Unknown line format: 1 2 X"));
     }
     @Test
     @DisplayName("Parsing robot command with invalid command should throw exception")
@@ -102,7 +100,7 @@ class RobotProcessorTDDTest {
 
         // when / then
         Exception ex = assertThrows(IllegalArgumentException.class, () -> parseInput(input));
-        assertTrue(ex.getMessage().contains("Invalid commands: MAL"));
+        assertTrue(ex.getMessage().contains("Unknown line format: MAL"));
     }
 
     @Test
@@ -134,7 +132,7 @@ class RobotProcessorTDDTest {
 
         // when / then
         Exception ex = assertThrows(IllegalArgumentException.class, () -> parseInput(input));
-        assertTrue(ex.getMessage().contains("Invalid robot position: LMLM"));
+        assertTrue(ex.getMessage().contains("Commands without robot position: LMLM"));
     }
 
     @Test
