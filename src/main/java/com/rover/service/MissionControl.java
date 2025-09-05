@@ -2,16 +2,16 @@ package com.rover.service;
 
 import com.rover.command.Command;
 import com.rover.command.CommandFactory;
-import com.rover.input.InputContext;
+import com.rover.input.MissionContext;
 import com.rover.model.Plateau;
 import com.rover.model.Robot;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class RobotProcessor {
+public class MissionControl {
 
-    public void process(InputContext context) {
+    public void process(MissionContext context) {
         Plateau plateau = context.getPlateau();
         Set<String> occupied = new HashSet<>();
 

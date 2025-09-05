@@ -1,10 +1,10 @@
 package com.rover;
 
-import com.rover.input.InputContext;
+import com.rover.input.MissionContext;
 import com.rover.input.InputType;
 import com.rover.model.Plateau;
 import com.rover.model.Robot;
-import com.rover.service.RobotProcessor;
+import com.rover.service.MissionControl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +13,10 @@ import java.util.List;
 import static com.rover.Main.detectInputType;
 import static org.junit.jupiter.api.Assertions.*;
 
-class RobotProcessorTDDTest {
+class MissionControlTDDTest {
 
-    private InputContext parseInput(String[] lines) {
-        InputContext context = new InputContext();
+    private MissionContext parseInput(String[] lines) {
+        MissionContext context = new MissionContext();
         int lineNumber = 0;
         for (String line : lines) {
             lineNumber++;
@@ -35,7 +35,7 @@ class RobotProcessorTDDTest {
         String[] input = {"5 5"};
 
         // when
-        InputContext context = parseInput(input);
+        MissionContext context = parseInput(input);
         Plateau plateau = context.getPlateau();
 
         // then
@@ -65,7 +65,7 @@ class RobotProcessorTDDTest {
         };
 
         // when
-        InputContext context = parseInput(input);
+        MissionContext context = parseInput(input);
         Robot robot = context.getLastRobotInput();
 
         // then
@@ -114,7 +114,7 @@ class RobotProcessorTDDTest {
         };
 
         // when
-        InputContext context = parseInput(input);
+        MissionContext context = parseInput(input);
         Robot robot = context.getLastRobotInput();
 
         // then
@@ -144,8 +144,8 @@ class RobotProcessorTDDTest {
                 "1 2 N",
                 "M"
         };
-        InputContext context = parseInput(input);
-        RobotProcessor processor = new RobotProcessor();
+        MissionContext context = parseInput(input);
+        MissionControl processor = new MissionControl();
 
         // when
         processor.process(context);
@@ -166,8 +166,8 @@ class RobotProcessorTDDTest {
                 "1 2 N",
                 "L"
         };
-        InputContext context = parseInput(input);
-        RobotProcessor processor = new RobotProcessor();
+        MissionContext context = parseInput(input);
+        MissionControl processor = new MissionControl();
 
         // when
         processor.process(context);
@@ -188,8 +188,8 @@ class RobotProcessorTDDTest {
                 "3 3 E",
                 "MMRMMRMRRM"
         };
-        InputContext context = parseInput(input);
-        RobotProcessor processor = new RobotProcessor();
+        MissionContext context = parseInput(input);
+        MissionControl processor = new MissionControl();
 
         // when
         processor.process(context);
@@ -217,8 +217,8 @@ class RobotProcessorTDDTest {
                 "1 3 S",
                 "MMM"
         };
-        InputContext context = parseInput(input);
-        RobotProcessor processor = new RobotProcessor();
+        MissionContext context = parseInput(input);
+        MissionControl processor = new MissionControl();
 
         // when / then
         Exception ex = assertThrows(IllegalStateException.class, () -> processor.process(context));
@@ -236,8 +236,8 @@ class RobotProcessorTDDTest {
                 "1 4 S",
                 "MMM"
         };
-        InputContext context = parseInput(input);
-        RobotProcessor processor = new RobotProcessor();
+        MissionContext context = parseInput(input);
+        MissionControl processor = new MissionControl();
 
         // when / then
         Exception ex = assertThrows(IllegalStateException.class, () -> processor.process(context));
@@ -255,8 +255,8 @@ class RobotProcessorTDDTest {
                 "0 0 N",
                 "MMMM"
         };
-        InputContext context = parseInput(input);
-        RobotProcessor processor = new RobotProcessor();
+        MissionContext context = parseInput(input);
+        MissionControl processor = new MissionControl();
 
         // when / then
         Exception ex = assertThrows(IllegalStateException.class, () -> processor.process(context));
@@ -276,8 +276,8 @@ class RobotProcessorTDDTest {
                 "4 4 W",
                 "MMLL"
         };
-        InputContext context = parseInput(input);
-        RobotProcessor processor = new RobotProcessor();
+        MissionContext context = parseInput(input);
+        MissionControl processor = new MissionControl();
 
         // when
         processor.process(context);

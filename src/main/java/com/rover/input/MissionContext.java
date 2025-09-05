@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class InputContext {
+public class MissionContext {
     private Plateau plateau;
     private final List<Robot> robots = new ArrayList<>();
 

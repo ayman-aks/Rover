@@ -14,6 +14,6 @@ public enum InputType {
     ROVER_POSITION(ParsingFunctions::parseRobotPosition),
     ROVER_COMMANDS(ParsingFunctions::parseRobotCommands);
 
-    private final BiConsumer<String, InputContext> parser;
+    private final BiConsumer<String, MissionContext> parser;
 
 }
